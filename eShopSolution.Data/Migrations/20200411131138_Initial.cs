@@ -94,8 +94,7 @@ namespace eShopSolution.Data.Migrations
                     OriginalPrice = table.Column<decimal>(nullable: false),
                     Stock = table.Column<int>(nullable: false, defaultValue: 0),
                     ViewCount = table.Column<int>(nullable: false, defaultValue: 0),
-                    DateCreated = table.Column<DateTime>(nullable: false),
-                    SeoAlias = table.Column<string>(nullable: true)
+                    DateCreated = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -276,6 +275,74 @@ namespace eShopSolution.Data.Migrations
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "AppConfigs",
+                columns: new[] { "Key", "Value" },
+                values: new object[,]
+                {
+                    { "HomeTitle", "This is home page of eShopSolution" },
+                    { "HomeKeyword", "This is keyword of eShopSolution" },
+                    { "HomeDescription", "This description of eShopSolution" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "Id", "IsShowOnHome", "ParentId", "SortOrder", "Status" },
+                values: new object[,]
+                {
+                    { 1, true, null, 1, 1 },
+                    { 2, true, null, 1, 1 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Languages",
+                columns: new[] { "Id", "IsDefault", "Name" },
+                values: new object[,]
+                {
+                    { "vi-VN", true, "Tiếng Việt" },
+                    { "en-US", false, "English" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Products",
+                columns: new[] { "Id", "DateCreated", "OriginalPrice", "Price" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2020, 4, 11, 20, 11, 37, 774, DateTimeKind.Local).AddTicks(1032), 100m, 200m },
+                    { 2, new DateTime(2020, 4, 11, 20, 11, 37, 775, DateTimeKind.Local).AddTicks(8814), 100m, 200m }
+                });
+
+            migrationBuilder.InsertData(
+                table: "CategoryTranslations",
+                columns: new[] { "Id", "CategoryId", "LanguageId", "Name", "SeoAlias", "SeoDescription", "SeoTitle" },
+                values: new object[,]
+                {
+                    { 1, 1, "vi-VN", "Áo nam", "ao-nam", "Sản phẩm thời trang nam", "Sản phẩm thời trang nam" },
+                    { 3, 2, "vi-VN", "Áo nữ", "ao-nu", "Sản phẩm thời trang nữ", "Sản phẩm thời trang nữ" },
+                    { 2, 1, "en-US", "Men shirt", "men-shirt", "The shirt product for men", "The shirt product for men" },
+                    { 4, 2, "en-US", "Women shirt", "women-shirt", "The shirt product for women", "The shirt product for women" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ProductInCategories",
+                columns: new[] { "ProductId", "CategoryId" },
+                values: new object[,]
+                {
+                    { 1, 1 },
+                    { 2, 2 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ProductTranslations",
+                columns: new[] { "Id", "Description", "Details", "LanguageId", "Name", "ProductId", "SeoAlias", "SeoDescription", "SeoTitle" },
+                values: new object[,]
+                {
+                    { 1, "", "Mô tả sản phẩm", "vi-VN", "Áo nam", 1, "ao-nam", "Sản phẩm thời trang nam", "Sản phẩm thời trang nam" },
+                    { 2, "", "Description of product", "en-US", "Men shirt", 1, "men-shirt", "The shirt product for men", "The shirt product for men" },
+                    { 3, "", "Mô tả sản phẩm", "vi-VN", "Áo nam Viet tien", 2, "ao-nam-viet tien", "Sản phẩm thời trang nam viet tien", "Sản phẩm thời trang nam" },
+                    { 4, " Viet tien", "Description of product Viet tien", "en-US", "Men shirt Viet tien", 2, "men-shirt Viet tien", "The shirt product for men Viet tien", "The shirt product for men Viet tien" }
                 });
 
             migrationBuilder.CreateIndex(
