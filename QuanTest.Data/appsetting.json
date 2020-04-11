@@ -1,0 +1,5 @@
+{
+  "ConnectionStrings": {
+    "QuanTestConnection": "Server=.;Database=QuanTest;Trusted_Connection=True;"
+  }
+}
