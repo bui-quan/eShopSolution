@@ -17,6 +17,8 @@ namespace eShopSolution.Data.Configurations
             builder.Property(x => x.Stock).IsRequired(true).HasDefaultValue(0);
             builder.Property(x => x.ViewCount).IsRequired(true).HasDefaultValue(0);
             builder.Property(x => x.OriginalPrice).IsRequired();
+            builder.Property(a => a.Price).HasColumnType("decimal(18,2)");
+            builder.Property(a => a.OriginalPrice).HasColumnType("decimal(18,2)");
         }
     }
 }
